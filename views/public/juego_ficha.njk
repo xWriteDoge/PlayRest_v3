@@ -1,0 +1,37 @@
+{% extends "./base.njk" %}
+{% block titulo %}
+    Juego | Ficha
+{% endblock %}
+{% block contenido %}
+    <h1>Ficha juego</h1>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ juego.image }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Nombre: {{ juego.nombre }}</h5>
+            <p class="card-text">Descripción: {{ juego.descripcion }}</p>
+            <p class="card-text">Edad: {{ juego.edad }}</p>
+            <p class="card-text">Numero de jugadores: {{ juego.numJugadores }}</p>
+            <p class="card-text">Tipo: {{ juego.tipo.enum }}</p>
+            <p class="card-text">Precio: {{ juego.precio }}</p>
+            <p class="card-text">Imagen: {{ juego.imagen }}</p>
+            {% if session and session.usuario %}
+                <form action="/juego/borrar/{{ juego.id }}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-danger w-100">Borrar</button>
+                </form>
+                <a class="btn btn-primary w-100" href="/juego/editar/{{ juego.id }}">Editar</a>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <h3>Ediciones del juego</h3>
+            {% for edicion in juegos.edicion %}
+                <div class="row m-1">
+                    <div class="col-6">{{ edicion.nombre }}</div>
+                    <div class="col-6">{{ edicion.anyo }}</div>
+                </div>
+            {% else %}
+                <small class="text-muted">No hay ediciones</small>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
