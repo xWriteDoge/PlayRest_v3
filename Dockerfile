@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 8080
 # Especifica el comando por defecto para ejecutar al iniciar el contenedor
 
-CMD ["npm", "start"]
+CMD ["start"]
